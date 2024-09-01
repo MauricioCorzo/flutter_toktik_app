@@ -1,4 +1,4 @@
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' show NumberFormat;
 
 class HumanNumbersFormats {
   static String humanReadbleNumber(double number) {

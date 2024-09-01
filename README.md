@@ -10,6 +10,7 @@ Pueden descargar 8 videos de aquí:
 [Pexels Free Videos](https://www.pexels.com/search/videos/vertical/)
 
 Renombren esos videos así, ya que es lo que se encuentra en nuestro data source.
+Los videos deben ser menores a 10Mb para que funcione la app en local.
 
 ```
 1.mp4
