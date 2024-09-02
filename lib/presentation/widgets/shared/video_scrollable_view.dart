@@ -23,11 +23,9 @@ class VideoScrollableView extends StatelessWidget {
         return Stack(
           children: [
             //VideoPlayer + Gradient
-            Center(
-              child: SizedBox.expand(
-                child: FullScreenPlayer(
-                  videoPost: videoPost,
-                ),
+            SizedBox.expand(
+              child: FullScreenPlayer(
+                videoPost: videoPost,
               ),
             ),
             // Botones
