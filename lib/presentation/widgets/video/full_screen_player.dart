@@ -52,6 +52,9 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
             ),
           );
         }
+        final size = controller.value.size;
+        final width = size.width;
+        final height = size.height;
         return GestureDetector(
           onTap: () {
             if (controller.value.isPlaying) {
@@ -63,8 +66,18 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
           child: AspectRatio(
               aspectRatio: controller.value.aspectRatio,
               child: Stack(
+                fit: StackFit.expand,
                 children: [
-                  VideoPlayer(controller),
+                  FittedBox(
+                    fit: BoxFit.cover,
+                    child: SizedBox(
+                      width: width,
+                      height: height,
+                      child: AspectRatio(
+                          aspectRatio: controller.value.aspectRatio,
+                          child: VideoPlayer(controller)),
+                    ),
+                  ),
                   //Gradient
                   VideoBackground(
                     stops: const [0.6, 1.0],
