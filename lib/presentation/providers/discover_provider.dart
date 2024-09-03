@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:toktik/domain/entities/video_post.dart' show VideoPost;
-import 'package:toktik/infrastructure/models/local_video_model.dart';
-import 'package:toktik/shared/data/local_video_post.dart' show videoPostsData;
+import 'package:toktik/domain/repositories/video_posts_repository.dart';
 
 class DiscoverProvider extends ChangeNotifier {
-  //TODO: Respository, DataSource
+  final VideoPostsRepository videoPostsRepository;
 
   bool initialLoading = true;
   List<VideoPost> videos = [];
 
+  DiscoverProvider({
+    required this.videoPostsRepository,
+  });
+
   // or loadNextVideo()
   Future<void> loadNextPage() async {
-    await Future.delayed(const Duration(seconds: 2));
+    // await Future.delayed(const Duration(seconds: 2));
 
-    final newVideos = videoPostsData.map((videoInfo) {
-      final videoModel = LocalVideoModel.fromJson(json: videoInfo);
+    // final newVideos = videoPostsData.map((videoInfo) {
+    //   final videoModel = LocalVideoModel.fromJson(json: videoInfo);
 
-      final videoPostsEntity = videoModel.toVideoPostEntity();
+    //   final videoPostsEntity = videoModel.toVideoPostEntity();
 
-      return videoPostsEntity;
-    });
+    //   return videoPostsEntity;
+    // });
+
+    final newVideos = await videoPostsRepository.getTrendingVideosByPage(1);
 
     // Se puede transforma el newVdieos a List con .toList()
     // pero la funcion .addAll() acepta un <Iterable>

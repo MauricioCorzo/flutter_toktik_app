@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart'
     show ChangeNotifierProvider, MultiProvider;
 import 'package:toktik/config/theme/app_theme.dart';
+import 'package:toktik/infrastructure/datasources/local_videos_datasource_impl.dart';
+import 'package:toktik/infrastructure/repositories/video_posts_repository_impl.dart';
 import 'package:toktik/presentation/providers/discover_provider.dart'
     show DiscoverProvider;
 import 'package:toktik/presentation/screens/discover/discover_screen.dart';
@@ -20,6 +22,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final videoPostsRepositry =
+        VideoPostsRepositoryImpl(videosDatasource: LocalVideosDatasourceImpl());
+
     return MultiProvider(
       /* or [ChangeNotifierProvider(create: (_) => DiscoverProvider()..loadNextPage()] */
       providers: [
@@ -27,7 +32,8 @@ class MyApp extends StatelessWidget {
             lazy:
                 false, // llama al constructor inmediatamente cuando se crea la referencia al Provider
             create: (_) {
-              final discoverProvider = DiscoverProvider();
+              final discoverProvider =
+                  DiscoverProvider(videoPostsRepository: videoPostsRepositry);
               discoverProvider.loadNextPage();
               return discoverProvider;
             }),
