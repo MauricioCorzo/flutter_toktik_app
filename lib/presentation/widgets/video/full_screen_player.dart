@@ -63,40 +63,38 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
             }
             controller.play();
           },
-          child: AspectRatio(
-              aspectRatio: controller.value.aspectRatio,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  FittedBox(
-                    fit: BoxFit.cover,
-                    child: SizedBox(
-                      width: width,
-                      height: height,
-                      child: AspectRatio(
-                          aspectRatio: controller.value.aspectRatio,
-                          child: VideoPlayer(controller)),
-                    ),
-                  ),
-                  //Gradient
-                  VideoBackground(
-                    stops: const [0.6, 1.0],
-                  ),
-                  //Caption
-                  Positioned(
-                    bottom: 50,
-                    left: 20,
-                    child: _VideoCaption(caption: widget.videoPost.caption),
-                  ),
-                  Positioned(
-                    bottom: 40,
-                    right: 20,
-                    child: VideoButtons(
-                        videoPost: widget.videoPost,
-                        isVideoPlaying: controller.value.isPlaying),
-                  )
-                ],
-              )),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              FittedBox(
+                fit: BoxFit.cover,
+                child: SizedBox(
+                  width: width,
+                  height: height,
+                  child: AspectRatio(
+                      aspectRatio: controller.value.aspectRatio,
+                      child: VideoPlayer(controller)),
+                ),
+              ),
+              //Gradient
+              VideoBackground(
+                stops: const [0.6, 1.0],
+              ),
+              //Caption
+              Positioned(
+                bottom: 50,
+                left: 20,
+                child: _VideoCaption(caption: widget.videoPost.caption),
+              ),
+              Positioned(
+                bottom: 40,
+                right: 20,
+                child: VideoButtons(
+                    videoPost: widget.videoPost,
+                    isVideoPlaying: controller.value.isPlaying),
+              )
+            ],
+          ),
         );
       },
     );
